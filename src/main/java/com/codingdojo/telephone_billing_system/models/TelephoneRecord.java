@@ -29,7 +29,7 @@ public class TelephoneRecord {
     private int duration;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "consumer_id")
+    @JoinColumn(name = "consumer")
     private Consumer consumer;
 
     public TelephoneRecord() {

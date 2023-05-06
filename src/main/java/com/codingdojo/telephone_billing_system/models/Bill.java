@@ -29,9 +29,8 @@ public class Bill {
     private double amount;
     
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "consumer_id")
+    @JoinColumn(name = "consumer")
     private Consumer consumer;
-    
 
     public Bill() {
         // Default constructor
