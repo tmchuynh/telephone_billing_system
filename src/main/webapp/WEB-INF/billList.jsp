@@ -38,36 +38,6 @@
 	</div>
 
 	<div class="container">
-		<c:if test="${bill.id eq null}">
-			<h2>Add New Bill</h2>
-		</c:if>
-		<c:if test="${bill.id ne null}">
-			<h2>Edit Bill</h2>
-		</c:if>
-		<form:form action="${billsFormAction}" method="post"
-			modelAttribute="bill">
-			<input type="hidden" name="consumerId" value="${consumerId}" />
-			<div class="form-group">
-				<label for="billDate">Bill Date:</label>
-				<form:input type="date" path="billDate" class="form-control"
-					id="billDate" required="required" />
-			</div>
-			<div class="form-group">
-				<label for="amount">Amount:</label>
-				<form:input type="number" path="amount" class="form-control"
-					id="amount" required="required" />
-			</div>
-			<c:choose>
-				<c:when test="${bill.id ne null}">
-					<button type="submit" class="btn btn-primary">Update Bill</button>
-					<a href="/bills/${bill.id}" class="btn btn-secondary">Cancel</a>
-				</c:when>
-				<c:otherwise>
-					<button type="submit" class="btn btn-primary">Save Bill</button>
-				</c:otherwise>
-			</c:choose>
-		</form:form>
-
 		<a href="/" class="btn btn-secondary mt-3">Back to Consumer List</a>
 	</div>
 

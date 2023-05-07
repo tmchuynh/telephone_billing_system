@@ -9,7 +9,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,14 +18,19 @@ public class Consumer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private int numberOfTelephones;
+	
 	@Column(name = "first_name")
 	private String firstName;
 	
 	@Column(name = "last_name")
 	private String lastName;
 	
-	@Column(name = "phone_number")
-    private String phoneNumber;
+	private boolean isPhoneCallUnlimited;
+	private Double phoneCallCost;
+
+	private boolean isTextMessageUnlimited;
+	private Double textMessageCost;
 	
 	@OneToMany(mappedBy = "consumer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Bill> bills;
@@ -38,7 +42,6 @@ public class Consumer {
     public Consumer(String firstName, String lastName, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
     }
 
 	public Long getId() {
@@ -65,14 +68,6 @@ public class Consumer {
 		this.lastName = lastName;
 	}
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
 	public List<Bill> getBills() {
 		return bills;
 	}
@@ -80,6 +75,48 @@ public class Consumer {
 	public void setBills(List<Bill> bills) {
 		this.bills = bills;
 	}
+
+	public int getNumberOfTelephones() {
+		return numberOfTelephones;
+	}
+
+	public void setNumberOfTelephones(int numberOfTelephones) {
+		this.numberOfTelephones = numberOfTelephones;
+	}
+
+	public boolean isPhoneCallUnlimited() {
+		return isPhoneCallUnlimited;
+	}
+
+	public void setPhoneCallUnlimited(boolean isPhoneCallUnlimited) {
+		this.isPhoneCallUnlimited = isPhoneCallUnlimited;
+	}
+
+	public Double getPhoneCallCost() {
+		return phoneCallCost;
+	}
+
+	public void setPhoneCallCost(Double phoneCallCost) {
+		this.phoneCallCost = phoneCallCost;
+	}
+
+	public boolean isTextMessageUnlimited() {
+		return isTextMessageUnlimited;
+	}
+
+	public void setTextMessageUnlimited(boolean isTextMessageUnlimited) {
+		this.isTextMessageUnlimited = isTextMessageUnlimited;
+	}
+
+	public Double getTextMessageCost() {
+		return textMessageCost;
+	}
+
+	public void setTextMessageCost(Double textMessageCost) {
+		this.textMessageCost = textMessageCost;
+	}
+
+	
     
 
 }

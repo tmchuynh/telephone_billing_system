@@ -18,7 +18,7 @@
 					<th>ID</th>
 					<th>First Name</th>
 					<th>Last Name</th>
-					<th>Phone Number</th>
+					<th># of Phones</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -26,9 +26,9 @@
 				<c:forEach items="${consumers}" var="consumer">
 					<tr>
 						<td>${consumer.id}</td>
-						<td>${consumer.lastName}</td>
 						<td>${consumer.firstName}</td>
-						<td>${consumer.phoneNumber}</td>
+						<td>${consumer.lastName}</td>
+						<td>${consumer.numberOfTelephones }</td>
 						<td><a href="/bills/${consumer.id}" class="btn btn-primary">View
 								Bills</a></td>
 					</tr>

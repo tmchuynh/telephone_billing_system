@@ -23,11 +23,6 @@
 				type="text" id="lastName" name="lastName" class="form-control"
 				required>
 		</div>
-		<div class="mb-3">
-			<label for="phoneNumber" class="form-label">Phone Number:</label> <input
-				type="text" id="phoneNumber" name="phoneNumber" class="form-control"
-				required>
-		</div>
 		<button type="submit" class="btn btn-primary">Save Customer</button>
 		<a href="/" class="btn btn-secondary">Cancel</a>
 	</form>

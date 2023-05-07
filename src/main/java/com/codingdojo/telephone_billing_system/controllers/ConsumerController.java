@@ -1,5 +1,7 @@
 package com.codingdojo.telephone_billing_system.controllers;
 
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,16 +37,58 @@ public class ConsumerController {
 	
 	
 	@PostMapping("/save")
-    public String saveCustomer(@RequestParam("firstName") String firstName,
-    							@RequestParam("lastName") String lastName,
-                               @RequestParam("phoneNumber") String phoneNumber) {
-        Consumer newConsumer = new Consumer();
-        newConsumer.setFirstName(firstName);
-        newConsumer.setLastName(lastName);
-        newConsumer.setPhoneNumber(phoneNumber);
+	public String saveCustomer(@RequestParam("firstName") String firstName,
+	                           @RequestParam("lastName") String lastName) {
+	    Consumer newConsumer = new Consumer();
+	    newConsumer.setFirstName(firstName);
+	    newConsumer.setLastName(lastName);
 
-        consumerService.saveConsumer(newConsumer);
+	    // Assign random values to numberOfTelephones
+	    int numberOfTelephones = generateRandomNumberOfTelephones();
+	    newConsumer.setNumberOfTelephones(numberOfTelephones);
 
-        return "redirect:/";
-    }
+	    // Assign random values to isPhoneCallUnlimited and isTextMessageUnlimited
+	    boolean isPhoneCallUnlimited = getRandomBoolean();
+	    boolean isTextMessageUnlimited = getRandomBoolean();
+	    newConsumer.setPhoneCallUnlimited(isPhoneCallUnlimited);
+	    newConsumer.setTextMessageUnlimited(isTextMessageUnlimited);
+
+	    // Assign random value to textMessageCost if isTextMessageUnlimited is false
+	    if (!isTextMessageUnlimited) {
+	        double textMessageCost = getRandomTextMessageCost();
+	        newConsumer.setTextMessageCost(textMessageCost);
+	    } else {
+	        newConsumer.setTextMessageCost(null);
+	    }
+	    
+	    if (!isPhoneCallUnlimited) {
+	        double phoneCallCost = getRandomTextMessageCost();
+	        newConsumer.setPhoneCallCost(phoneCallCost);
+	    } else {
+	        newConsumer.setPhoneCallCost(null);
+	    }
+
+	    consumerService.saveConsumer(newConsumer);
+
+	    return "redirect:/";
+	}
+	
+	private int generateRandomNumberOfTelephones() {
+	    // Add your logic here to generate a random number
+	    // Example: Generating a random number between 1 and 10
+	    int minNumberOfTelephones = 1;
+	    int maxNumberOfTelephones = 10;
+	    Random random = new Random();
+	    return random.nextInt(maxNumberOfTelephones - minNumberOfTelephones + 1) + minNumberOfTelephones;
+	}
+	
+	private double getRandomTextMessageCost() {
+	    // Generate a random text message cost, e.g., between 0.01 and 0.10
+	    return new Random().nextDouble() * (2.75 - 0.75) + 0.75;
+	}
+	
+	private boolean getRandomBoolean() {
+	    // Generate a random boolean value
+	    return new Random().nextBoolean();
+	}
 }
