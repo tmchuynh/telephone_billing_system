@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,26 +10,38 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-	<h1>Consumer List</h1>
-	<table>
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Name</th>
-				<th>Phone Number</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${consumers}" var="consumer">
+	<div class="container">
+		<h1>Consumer List</h1>
+		<table class="table">
+			<thead>
 				<tr>
-					<td>${consumer.id}</td>
-					<td>${consumer.name}</td>
-					<td>${consumer.phoneNumber}</td>
+					<th>ID</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Phone Number</th>
+					<th>Action</th>
 				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				<c:forEach items="${consumers}" var="consumer">
+					<tr>
+						<td>${consumer.id}</td>
+						<td>${consumer.lastName}</td>
+						<td>${consumer.firstName}</td>
+						<td>${consumer.phoneNumber}</td>
+						<td><a href="/bills/${consumer.id}" class="btn btn-primary">View
+								Bills</a></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
 
-	<a href="/addConsumer">Add New Consumer</a>
+	<div class="container">
+		<a href="/consumers/add" class="btn btn-secondary">Add New
+			Consumer</a>
+	</div>
+
 </body>
+
 </html>

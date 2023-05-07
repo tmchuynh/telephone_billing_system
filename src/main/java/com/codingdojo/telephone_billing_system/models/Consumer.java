@@ -29,10 +29,7 @@ public class Consumer {
     private String phoneNumber;
 	
 	@OneToMany(mappedBy = "consumer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<TelephoneRecord> telephoneRecords;
-	
-	@OneToOne(mappedBy = "consumer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Bill bill;
+    private List<Bill> bills;
 	
 	public Consumer() {
         // Default constructor
@@ -76,29 +73,13 @@ public class Consumer {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public List<TelephoneRecord> getTelephoneRecords() {
-        return telephoneRecords;
-    }
+	public List<Bill> getBills() {
+		return bills;
+	}
 
-    public void setTelephoneRecords(List<TelephoneRecord> telephoneRecords) {
-        this.telephoneRecords = telephoneRecords;
-    }
-
-    public void addTelephoneRecord(TelephoneRecord telephoneRecord) {
-        telephoneRecord.setConsumer(this);
-        telephoneRecords.add(telephoneRecord);
-    }
-
-    public void removeTelephoneRecord(TelephoneRecord telephoneRecord) {
-        telephoneRecords.remove(telephoneRecord);
-    }
+	public void setBills(List<Bill> bills) {
+		this.bills = bills;
+	}
     
-    public Bill getBill() {
-        return bill;
-    }
-
-    public void setBill(Bill bill) {
-        this.bill = bill;
-    }
 
 }

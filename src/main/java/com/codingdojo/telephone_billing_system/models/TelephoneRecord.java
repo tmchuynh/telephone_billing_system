@@ -1,6 +1,9 @@
 package com.codingdojo.telephone_billing_system.models;
 
 import java.util.Date;
+import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,6 +12,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -18,28 +23,20 @@ public class TelephoneRecord {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(name = "consumer_id")
-    private Long consumerId;
     
-    @Column(name = "call_date")
-    private Date callDate;
+	@Column(name = "call_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date callDate;
+
     
-    @Column(name = "duration")
-    private int duration;
+    @Column(name = "call_duration")
+    private int callDuration;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "consumer")
-    private Consumer consumer;
+    private List<Bill> bills;
+
 
     public TelephoneRecord() {
         // Default constructor
-    }
-
-    public TelephoneRecord(Long consumerId, Date callDate, int duration) {
-        this.consumerId = consumerId;
-        this.callDate = callDate;
-        this.duration = duration;
     }
 
 	public Long getId() {
@@ -48,14 +45,6 @@ public class TelephoneRecord {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Long getConsumerId() {
-		return consumerId;
-	}
-
-	public void setConsumerId(Long consumerId) {
-		this.consumerId = consumerId;
 	}
 
 	public Date getCallDate() {
@@ -67,14 +56,29 @@ public class TelephoneRecord {
 	}
 
 	public int getDuration() {
-		return duration;
+		return callDuration;
 	}
 
-	public void setDuration(int duration) {
-		this.duration = duration;
+	public void setDuration(int callDuration) {
+		this.callDuration = callDuration;
 	}
-	
-	public void setConsumer(Consumer consumer) {
-        this.consumer = consumer;
-    }
+
+	public int getCallDuration() {
+	    return callDuration;
+	}
+
+	public void setCallDuration(int callDuration) {
+	    this.callDuration = callDuration;
+	}
+
+	public List<Bill> getBills() {
+		return bills;
+	}
+
+	public void setBills(List<Bill> bills) {
+		this.bills = bills;
+	}
+
+
+
 }

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,14 +12,24 @@
 </head>
 <body>
 	<h1>Add Consumer</h1>
-	<form method="post" action="/saveConsumer">
-		<label for="firstName">First Name:</label> <input type="text" id="firstName"
-			name="firstName" required><br>
-			<label for="lastName">Last Name:</label> <input type="text" id="lastName"
-			name="lastName" required><br>
-		<br> <label for="phoneNumber">Phone Number:</label> <input
-			type="text" id="phoneNumber" name="phoneNumber" required><br>
-		<br> <input type="submit" value="Save Customer">
+	<form class="form" method="post" action="/consumers/save">
+		<div class="mb-3">
+			<label for="firstName" class="form-label">First Name:</label> <input
+				type="text" id="firstName" name="firstName" class="form-control"
+				required>
+		</div>
+		<div class="mb-3">
+			<label for="lastName" class="form-label">Last Name:</label> <input
+				type="text" id="lastName" name="lastName" class="form-control"
+				required>
+		</div>
+		<div class="mb-3">
+			<label for="phoneNumber" class="form-label">Phone Number:</label> <input
+				type="text" id="phoneNumber" name="phoneNumber" class="form-control"
+				required>
+		</div>
+		<button type="submit" class="btn btn-primary">Save Customer</button>
+		<a href="/" class="btn btn-secondary">Cancel</a>
 	</form>
 </body>
 </html>
